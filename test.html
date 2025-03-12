@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RevisionNestle Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .subject-card {
+            display: inline-block;
+            padding: 20px;
+            margin: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .subject-card:hover {
+            background-color: #e0e0e0;
+        }
+        .screen {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .active {
+            display: block;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>RevisionNestle Test</h1>
+    
+    <div id="home-screen" class="screen active">
+        <h2>Choose a subject:</h2>
+        <div class="subject-grid">
+            <div class="subject-card" data-subject="maths">Maths</div>
+            <div class="subject-card" data-subject="english">English</div>
+            <div class="subject-card" data-subject="geography">Geography</div>
+            <div class="subject-card" data-subject="history">History</div>
+            <div class="subject-card" data-subject="ict">ICT</div>
+        </div>
+        <button id="instructions-btn">How to Play</button>
+    </div>
+
+    <div id="instructions-screen" class="screen">
+        <h2>How to Play</h2>
+        <p>This is a test page to check if the basic functionality works.</p>
+        <button id="back-to-home">Back to Home</button>
+    </div>
+
+    <div id="game-screen" class="screen">
+        <h2 id="current-subject">Subject</h2>
+        <p>Game screen for: <span id="subject-name"></span></p>
+        <p>Word of the day: <span id="word-of-day"></span></p>
+        <button id="back-btn">Back</button>
+    </div>
+
+    <script>
+        // Simple word lists
+        const WORDS = {
+            maths: ["angle", "graph", "slope", "prime", "ratio"],
+            english: ["metre", "sonnet", "rhyme", "prose", "verse"],
+            geography: ["globe", "atlas", "delta", "fjord", "isles"],
+            history: ["roman", "medal", "epoch", "relic", "treaty"],
+            ict: ["email", "pixel", "cache", "virus", "query"]
+        };
+
+        // Function to get a word for a specific subject
+        function getWordOfTheDay(subject) {
+            const words = WORDS[subject];
+            const index = Math.floor(Math.random() * words.length);
+            return words[index];
+        }
+
+        // DOM Elements
+        const homeScreen = document.getElementById('home-screen');
+        const instructionsScreen = document.getElementById('instructions-screen');
+        const gameScreen = document.getElementById('game-screen');
+        const subjectCards = document.querySelectorAll('.subject-card');
+        const instructionsBtn = document.getElementById('instructions-btn');
+        const backToHomeBtn = document.getElementById('back-to-home');
+        const backBtn = document.getElementById('back-btn');
+        const currentSubjectEl = document.getElementById('current-subject');
+        const subjectNameEl = document.getElementById('subject-name');
+        const wordOfDayEl = document.getElementById('word-of-day');
+
+        // Show instructions screen
+        function showInstructions() {
+            homeScreen.classList.remove('active');
+            instructionsScreen.classList.add('active');
+            gameScreen.classList.remove('active');
+        }
+
+        // Show home screen
+        function showHome() {
+            homeScreen.classList.add('active');
+            instructionsScreen.classList.remove('active');
+            gameScreen.classList.remove('active');
+        }
+
+        // Start the game with selected subject
+        function startGame(subject) {
+            // Set current subject
+            currentSubjectEl.textContent = subject.charAt(0).toUpperCase() + subject.slice(1);
+            subjectNameEl.textContent = subject;
+            
+            // Get word of the day for this subject
+            const targetWord = getWordOfTheDay(subject);
+            wordOfDayEl.textContent = targetWord;
+            
+            // Show game screen
+            homeScreen.classList.remove('active');
+            instructionsScreen.classList.remove('active');
+            gameScreen.classList.add('active');
+        }
+
+        // Initialize the game
+        function initGame() {
+            // Add event listeners
+            instructionsBtn.addEventListener('click', showInstructions);
+            backToHomeBtn.addEventListener('click', showHome);
+            backBtn.addEventListener('click', showHome);
+            
+            // Add event listeners to subject cards
+            subjectCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const subject = card.getAttribute('data-subject');
+                    console.log('Subject card clicked:', subject);
+                    startGame(subject);
+                });
+            });
+        }
+
+        // Initialize when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', initGame);
+    </script>
+</body>
+</html> 

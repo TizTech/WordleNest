@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordleNest - A fun way to revise!</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+</head>
+<body>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="material-symbols-outlined" id="theme-icon">dark_mode</span>
+    </button>
+
+    <header>
+        <div class="logo-container">
+            <h1>WordleNest</h1>
+            <p class="tagline">A fun way to revise!</p>
+        </div>
+    </header>
+
+    <main>
+        <div id="home-screen" class="screen active">
+            <h2>Welcome to WordleNest!</h2>
+            <p>Choose a subject to start playing:</p>
+            <div class="subject-grid">
+                <div class="subject-card" data-subject="maths">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Maths</h3>
+                </div>
+                <div class="subject-card" data-subject="english">
+                    <i class="fas fa-book"></i>
+                    <h3>English</h3>
+                </div>
+                <div class="subject-card" data-subject="geography">
+                    <i class="fas fa-globe-americas"></i>
+                    <h3>Geography</h3>
+                </div>
+                <div class="subject-card" data-subject="history">
+                    <i class="fas fa-landmark"></i>
+                    <h3>History</h3>
+                </div>
+                <div class="subject-card" data-subject="ict">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>ICT</h3>
+                </div>
+            </div>
+            <button id="instructions-btn" class="btn">How to Play</button>
+        </div>
+
+        <div id="instructions-screen" class="screen">
+            <h2>How to Play</h2>
+            <ul>
+                <li>Guess the 5-letter word related to your chosen subject.</li>
+                <li>Each guess must be a valid 5-letter word.</li>
+                <li>After each guess, the color of the tiles will change:</li>
+                <div class="example-tiles">
+                    <div class="example-tile correct">A</div>
+                    <p>Correct letter in the correct spot</p>
+                </div>
+                <div class="example-tiles">
+                    <div class="example-tile present">B</div>
+                    <p>Correct letter in the wrong spot</p>
+                </div>
+                <div class="example-tiles">
+                    <div class="example-tile absent">C</div>
+                    <p>Letter not in the word</p>
+                </div>
+                <li>You have 6 attempts to guess the word.</li>
+                <li>A new word is available each day for each subject.</li>
+            </ul>
+            <button id="back-to-home" class="btn">Back to Home</button>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div id="game-container">
+                <div id="game-header">
+                    <h2 id="subject-title">Revision Wordle</h2>
+                    <p id="category-info">Category: <span id="current-category">General</span></p>
+                </div>
+                
+                <!-- Game Board -->
+                <div id="game-board" class="board">
+                    <!-- Board rows will be created by JavaScript -->
+                </div>
+                
+                <!-- Game Message -->
+                <div id="game-message">
+                    <p id="message"></p>
+                </div>
+                
+                <!-- Keyboard -->
+                <div id="keyboard">
+                    <!-- Keyboard rows will be created by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Back button -->
+            <button id="back-to-subjects" class="back-to-subjects" aria-label="Back to subjects">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+        </div>
+    </main>
+
+    <div id="game-message" class="modal">
+        <div class="modal-content">
+            <h3 id="result-message"></h3>
+            <p id="correct-word"></p>
+            <button id="play-again" class="btn">Play Again</button>
+            <button id="return-home" class="btn">Return to Home</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 WordleNest <span onclick="window.open('https://tizzle.org')">by Revision Nest and Tizzle Studios</span>. All rights reserved.</p>
+    </footer>
+
+    <script src="words.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
